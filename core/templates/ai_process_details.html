@@ -3,6 +3,7 @@
 <div class="ai-process">
     <div class="ai-tool{% if single_ai_tool_enabled %} single-tool-hidden{% endif %}">
         <h5>
+            <img src="{% static 'icons/bot.svg' %}" alt="" class="icon">
             Herramienta de IA
         </h5>
         <hr>
@@ -43,6 +44,7 @@
     <div class="process">
         <div class="process-header">
             <h5>
+                <img src="{% static 'icons/workflow.svg' %}" alt="" class="icon">
                 Proceso de IA
             </h5>
             <hr>
@@ -58,6 +60,7 @@
 
             <div class="human-verification">
                 {{ activity_form.human_verification.label_tag }}
+                <img src="{% static 'icons/shield-check.svg' %}" alt="" class="icon">
             </div>
             {{ activity_form.human_verification }}
             {{ activity_form.human_verification.errors }}
