@@ -1,0 +1,196 @@
+{% load static %}
+
+<section class="declaration-form">
+    <h1>Generar declaración de uso de IAG</h1>
+
+    <form method="POST" action="{% url 'create_declaration' %}">
+        {% csrf_token %}
+        {{ activity_formset.management_form }}
+
+        {% if form_errors %}
+            <div class="form-errors" role="alert">
+                <strong>No se pudo generar la declaración.</strong>
+                Revisa los campos marcados.
+            </div>
+        {% endif %}
+
+        <div class="project-detail">
+            {{ project_form.project_name.label_tag }}
+            {{ project_form.project_name }}
+            {{ project_form.project_name.errors }}
+        </div>
+
+        <div class="single-ai-tool-option">
+            <label>
+                {{ project_form.use_single_ai_tool }}
+                {{ project_form.use_single_ai_tool.label }}
+            </label>
+            {{ project_form.use_single_ai_tool.errors }}
+        </div>
+
+        <div class="global-ai-tool" hidden>
+            <h3>Herramienta de IA utilizada en todas las actividades</h3>
+            <div class="tool-main">
+                <div class="tool-field">
+                    {{ project_form.global_ai_tool_name.label_tag }}
+                    {{ project_form.global_ai_tool_name }}
+                    {{ project_form.global_ai_tool_name.errors }}
+                </div>
+                <div class="tool-field">
+                    {{ project_form.global_ai_model_name.label_tag }}
+                    {{ project_form.global_ai_model_name }}
+                    {{ project_form.global_ai_model_name.errors }}
+                </div>
+                <div class="tool-field">
+                    {{ project_form.global_ai_model_version.label_tag }}
+                    {{ project_form.global_ai_model_version }}
+                    {{ project_form.global_ai_model_version.errors }}
+                </div>
+            </div>
+            <div class="tool-type">
+                {{ project_form.global_type_ai_tool.label_tag }}
+                <div class="selection-fields">
+                    {% for radio in project_form.global_type_ai_tool %}
+                        <label>
+                            {{ radio.tag }} {{ radio.choice_label }}
+                        </label>
+                    {% endfor %}
+                </div>
+                {{ project_form.global_type_ai_tool.errors }}
+            </div>
+        </div>
+
+        <h3>Fases y actividades XP</h3>
+        <p>Selecciona las actividades en las que utilizaste IAG.</p>
+
+        {% for phase in phases %}
+            <section class="card">
+                <h3>{{ phase.name }}</h3>
+
+                {% for activity, activity_form in activity_forms %}
+                    {% if activity.phase_id == phase.id %}
+                        <div class="phase-card">
+                            <label class="activity-card">
+                                <input
+                                    type="checkbox"
+                                    name="activities"
+                                    value="{{ activity.id }}"
+                                    class="activity-checkbox"
+                                    data-fields-id="fields_{{ activity.id }}"
+                                    {% if activity.id|stringformat:"s" in selected_activity_ids %}checked{% endif %}
+                                >
+                                {{ activity.name }}
+                            </label>
+                            <div class="activity-fields" id="fields_{{ activity.id }}" hidden>
+                                <details open>
+                                    <summary>Detalle del uso de IAG</summary>
+                                    {% include "ai_process_details.html" with activity_form=activity_form single_ai_tool_enabled=single_ai_tool_enabled %}
+                                </details>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+                <div class="custom-activities-header">
+                    <h4>Otras actividades</h4>
+                    <p>Registra las actividades no incluidas en el catálogo (opcional)</p>
+                    <button
+                        type="button"
+                        class="add-custom-activity"
+                        data-phase-id="{{ phase.id }}"
+                    >
+                        + Agregar nueva actividad
+                    </button>
+                </div>
+                {% for custom_phase, custom_activity_formset in phase_custom_forms %}
+                    {% if custom_phase.id == phase.id %}
+                        {{ custom_activity_formset.management_form }}
+                        <div
+                            class="custom-activity-list"
+                            data-phase-id="{{ phase.id }}"
+                        >
+                        {% for custom_form in custom_activity_formset %}
+                            <div class="phase-card custom-activity-card">
+                                <div class="custom-activity-controls">
+                                    <label class="activity-card">
+                                        <input
+                                            type="checkbox"
+                                            name="custom_activities"
+                                            value="{{ phase.id }}-{{ forloop.counter0 }}"
+                                            class="activity-checkbox"
+                                            data-fields-id="custom_fields_{{ phase.id }}_{{ forloop.counter0 }}"
+                                            checked
+                                        >
+                                        {{ custom_form.activity_name.label_tag }}
+                                        {{ custom_form.activity_name }}
+                                        {{ custom_form.activity_name.errors }}
+                                    </label>
+                                    <button
+                                        type="button"
+                                        class="remove-custom-activity"
+                                        aria-label="Eliminar actividad"
+                                        title="Eliminar actividad"
+                                    >
+                                    </button>
+                                </div>
+                                <div
+                                    class="activity-fields"
+                                    id="custom_fields_{{ phase.id }}_{{ forloop.counter0 }}"
+                                    hidden
+                                >
+                                    <details>
+                                        <summary>Proceso del uso de IAG</summary>
+                                        {% include "ai_process_details.html" with activity_form=custom_form single_ai_tool_enabled=single_ai_tool_enabled %}
+                                    </details>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        </div>
+                        <div
+                            class="custom-activity-template"
+                            data-phase-id="{{ phase.id }}"
+                            hidden
+                        >
+                            <div class="phase-card custom-activity-card">
+                                <div class="custom-activity-controls">
+                                    <label class="activity-card">
+                                        <input
+                                            type="checkbox"
+                                            name="custom_activities"
+                                            value="{{ phase.id }}-__prefix__"
+                                            class="activity-checkbox"
+                                            data-fields-id="custom_fields_{{ phase.id }}___prefix__"
+                                            checked
+                                        >
+                                        {{ custom_activity_formset.empty_form.activity_name.label_tag }}
+                                        {{ custom_activity_formset.empty_form.activity_name }}
+                                        {{ custom_activity_formset.empty_form.activity_name.errors }}
+                                    </label>
+                                    <button
+                                        type="button"
+                                        class="remove-custom-activity"
+                                        aria-label="Eliminar actividad"
+                                        title="Eliminar actividad"
+                                    >
+                                    </button>
+                                </div>
+                                <div
+                                    class="activity-fields"
+                                    id="custom_fields_{{ phase.id }}___prefix__"
+                                    hidden
+                                >
+                                    <details>
+                                        <summary>Proceso del uso de IAG</summary>
+                                        {% include "ai_process_details.html" with activity_form=custom_activity_formset.empty_form single_ai_tool_enabled=single_ai_tool_enabled %}
+                                    </details>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </section>
+        {% endfor %}
+
+        <button type="submit">Generar declaración</button>
+    </form>
+</section>

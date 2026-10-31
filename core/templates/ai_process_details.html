@@ -1,0 +1,77 @@
+{% load static %}
+
+<div class="ai-process">
+    <div class="ai-tool{% if single_ai_tool_enabled %} single-tool-hidden{% endif %}">
+        <h5>
+            Herramienta de IA
+        </h5>
+        <hr>
+
+        <div class="tool-fields">
+            <div class="tool-main">
+                <div class="tool-field">
+                    {{ activity_form.ai_tool_name.label_tag }}
+                    {{ activity_form.ai_tool_name }}
+                    {{ activity_form.ai_tool_name.errors }}
+                </div>
+                <div class="tool-field">
+                    {{ activity_form.ai_model_name.label_tag }}
+                    {{ activity_form.ai_model_name }}
+                    {{ activity_form.ai_model_name.errors }}
+                </div>
+                <div class="tool-field">
+                    {{ activity_form.ai_model_version.label_tag }}
+                    {{ activity_form.ai_model_version }}
+                    {{ activity_form.ai_model_version.errors }}
+                </div>
+            </div>
+
+            <div class="tool-type">
+                {{ activity_form.type_ai_tool.label_tag }}
+                <div class="selection-fields">
+                    {% for radio in activity_form.type_ai_tool %}
+                        <label>
+                            {{ radio.tag }} {{ radio.choice_label }}
+                        </label>
+                    {% endfor %}
+                    {{ activity_form.type_ai_tool.errors }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="process">
+        <div class="process-header">
+            <h5>
+                Proceso de IA
+            </h5>
+            <hr>
+        </div>
+
+        <div class="process-content">
+            {{ activity_form.input_data.label_tag }}
+            {{ activity_form.input_data }}
+            {{ activity_form.input_data.errors }}
+            {{ activity_form.description_process.label_tag }}
+            {{ activity_form.description_process }}
+            {{ activity_form.description_process.errors }}
+
+            <div class="human-verification">
+                {{ activity_form.human_verification.label_tag }}
+            </div>
+            {{ activity_form.human_verification }}
+            {{ activity_form.human_verification.errors }}
+        </div>
+
+        <div class="support-level">
+            <h5>Nivel de apoyo de la herramienta</h5>
+            <hr>
+            <div class="selection-fields">
+                {% for radio in activity_form.ai_support_level %}
+                    <label>{{ radio.tag }} {{ radio.choice_label }}</label>
+                {% endfor %}
+                {{ activity_form.ai_support_level.errors }}
+            </div>
+        </div>
+    </div>
+</div>
