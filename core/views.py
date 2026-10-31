@@ -6,6 +6,12 @@ from .forms import (
     ActivityDeclarationFormSet,
     CustomActivityDeclarationFormSet,
 )
+from .services import (
+    build_declaration,
+    build_declaration_pdf,
+    get_results,
+    serialize_declaration,
+)
 
 def home(request):
     phases = Phase.objects.prefetch_related("activities").all()
@@ -230,4 +236,21 @@ def create_declaration(request):
             "phase_custom_forms": phase_custom_forms,
             "single_ai_tool_enabled": single_ai_tool_enabled,
         },
+    )
+
+def download_declaration_pdf(request):
+    declarations = request.session.get("declarations")
+
+    if not declarations:
+        return HttpResponse(
+            "No hay declaraciones para descargar.",
+            status=400,
+        )
+
+    pdf_buffer = build_declaration_pdf(declarations)
+
+    return FileResponse(
+        pdf_buffer,
+        as_attachment=True,
+        filename="declaraciones-xp.pdf"
     )

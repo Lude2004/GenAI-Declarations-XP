@@ -204,3 +204,17 @@ function toggleActivityFields(activity) {
         input.disabled = !checkbox.checked;
     });
 }
+
+// Result
+const copyDeclarationButton = document.getElementById("copy-declaration");
+if (copyDeclarationButton) {
+    copyDeclarationButton.addEventListener("click", async () => {
+        const text = document.getElementById("declaration").innerText;
+        try {
+            await navigator.clipboard.writeText(text);
+            alert("Declaración copiada correctamente.");
+        } catch {
+            alert("No se pudo copiar. Selecciona el texto y cópialo manualmente.");
+        }
+    });
+}

@@ -1,0 +1,32 @@
+{% load static %}
+
+<section class="result-declaration">
+        <h3>
+            Tu declaración generada
+        </h3>
+
+        <div class="result-area">
+            <div class="btns">
+                <button 
+                    type="button"
+                    id="copy-declaration"
+                >
+                    Copiar
+                </button>
+                <a
+                    href="{% url 'download_declaration_pdf' %}"
+                    class="download-button"
+                >
+                    Descargar .pdf
+                </a>
+            </div>
+
+            <section class="text-area" id="declaration">
+                {% if result_text %}
+                    <pre>{{ result_text }}</pre>
+                {% else %}
+                    <p>Complete el formulario para generar tu declaración.</p>
+                {% endif %}
+            </section>
+        </div>
+</section>

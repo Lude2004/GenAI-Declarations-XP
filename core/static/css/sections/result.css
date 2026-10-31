@@ -1,0 +1,80 @@
+.result-declaration {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    border: 3px solid black;
+    border-radius: 16px;
+    padding: 16px;
+    width: 450px;
+    min-height: 670px;
+    box-sizing: border-box;
+    align-self: flex-start;
+}
+
+.result-declaration h3 {
+    text-align: left;
+} 
+
+.result-area {
+    background-color: var(--color-gray);
+    display: flex;
+    flex-direction: column;
+    min-height: 540px;
+    gap: 10px;
+    border: 2px solid lightgray;
+    border-radius: 8px;
+    padding: 12px;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.text-area {
+    background-color: white;
+    font-size: small;
+    height: 100%;
+    border: 2px dashed var(--color-primary);
+    border-radius: 16px;
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+    overflow: auto;
+}
+
+.text-area pre {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 16px;
+    max-width: 100%;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    text-align: left;
+    line-height: 1.6;
+}
+
+.btns {
+    display: flex;
+    justify-content: right;
+    gap: 10px;
+}
+
+.remove-custom-activity {
+    background-color: transparent;
+    border: 1px solid #8a1c1c;
+    color: #8a1c1c;
+    flex: 0 0 auto;
+    padding: 6px;
+}
+
+.remove-custom-activity:hover {
+    background-color: #8a1c1c;
+    color: white;
+}
+
+.download-button {
+    text-decoration: none;
+}
+
+.download-button:hover {
+    background-color: black;
+}
