@@ -1,0 +1,33 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GenAI-Declarations-XP</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>GenAI-Declarations-XP</h1>
+    </header>
+
+    <main>
+        <h2>Documenta el uso de IAG en tu proyecto de software</h2>
+        <p>Genera declaraciones estructuradas sobre el uso de Inteligencia Artificial Generativa (AIG) durante las actividades de Extreme Programming (XP).</p>
+        <div class="container">
+            <div class="form">
+                {% include "form.html" %}
+            </div>
+            <div class="result">
+                {% include "result.html" %}
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        Derechos de autor 2026
+    </footer>
+</body>
+</html>

@@ -1,0 +1,45 @@
+header h1 {
+    margin: 0;
+}
+
+main h2 {
+    font-size: 36px;
+}
+
+main p {
+    max-width: 600px;
+}
+
+.container {
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.form {
+    flex: 2;
+}
+
+.result {
+    position: sticky;
+    top: calc(var(--header-height) + 24px);
+    max-height: calc(100vh - var(--header-height) - 48px);
+    overflow-y: auto;
+    min-width: 0;
+    flex: 1.5;
+    z-index: 100;
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .result {
+        position: static;
+        max-height: none;
+        width: 100%;
+    }
+}
