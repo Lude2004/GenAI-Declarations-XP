@@ -1,0 +1,46 @@
+.card > .custom-activities-section,
+.card > .custom-activity-list {
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+.card > .custom-activities-section {
+    margin-top: 16px;
+}
+
+.custom-activities-section .header-detail h4,
+.custom-activities-section .body-description p {
+    margin: 0 0 15px;
+}
+
+.card > .custom-activity-list {
+    margin-bottom: 16px;
+}
+
+.phase-card > .custom-activity-controls {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.custom-activity-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.custom-activity-controls .activity-card {
+    flex: 1;
+    min-width: 0;
+}
+
+.custom-activity-card .activity-checkbox {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.custom-activities-section .body-detail > button {
+    align-self: flex-end;
+}

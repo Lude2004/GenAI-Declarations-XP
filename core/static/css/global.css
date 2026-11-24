@@ -1,0 +1,32 @@
+@import url("./sections/index.css?v=27");
+@import url("./sections/form.css?v=32");
+@import url("./sections/personalized_ai_activity.css?v=1");
+@import url("./sections/result.css?v=28");
+@import url("./sections/ai_components.css?v=27");
+@import url("./sections/declaration_document.css?v=28");
+
+@import url("./layout/header.css?v=27");
+@import url("./layout/main.css?v=27");
+@import url("./layout/footer.css?v=27");
+
+@import url("./components/buttons.css?v=27");
+@import url("./components/inputs.css?v=27");
+@import url("./components/dialog.css?v=27");
+
+:root {
+    --color-primary: #243C32;
+    --color-background: #F7F5F0;
+    --color-secundary: #d9a11f;
+    --color-terciary: #526158;
+    --color-borders: #D9DCD5;
+    --color-gray: rgb(247, 245, 245);
+    --color-required: #8a1c1c;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    --header-height: 72px;
+    interpolate-size: allow-keywords;
+    background-color: var(--color-background); 
+    margin: 0;
+}

@@ -1,0 +1,88 @@
+{% load static %}
+
+<article class="declaration-document" {% if not document_use_iag_enabled %}hidden{% endif %}>
+    <header class="header-description">
+        <p>
+            Declaración de uso de Inteligencia Artificial Generativa · Extreme Programming (XP)
+        </p>
+        <h2>{{ declarations.0.project_name }}</h2>
+        <p>{{ current_date }}</p>
+    </header>
+
+    <section class="declaration-section declaration-summary">
+        <div class="header">
+            <h3>Resumen del uso de IAG en el proyecto</h3>
+        </div>
+        <div class="summary-metrics">
+            <div class="summary-metric">
+                <strong>{{ document_summary.activity_count }}</strong>
+                <span>Actividades</span>
+            </div>
+            <div class="summary-metric">
+                <strong>{{ document_summary.phase_count }}</strong>
+                <span>Fases</span>
+            </div>
+            <div class="summary-metric">
+                <strong>{{ document_summary.tool_count }}</strong>
+                <span>Herramientas</span>
+            </div>
+            <div class="summary-metric">
+                <strong>{{ document_summary.predominant_support }}</strong>
+                <span>Apoyo predominante</span>
+            </div>
+        </div>
+
+    </section>
+
+    <div class="introduction-declaration">
+        <p>
+            El/los autor(es) declara(n) que las herramientas de inteligencia artificial generativa 
+            especificadas en este documento fueron utilizadas como apoyo en las tareas indicadas de 
+            la metodología XP durante el desarrollo del proyecto.
+        </p>
+    </div>
+
+    {% regroup declarations by xp_phase as phase_groups %}
+    {% for phase in phase_groups %}
+        <section class="declaration-section phase-card
+            {% if phase.grouper.name == 'Planificación' %}phase-card--planning
+            {% elif phase.grouper.name == 'Diseño' %}phase-card--design
+            {% elif phase.grouper.name == 'Codificación' %}phase-card--coding
+            {% elif phase.grouper.name == 'Pruebas' %}phase-card--testing{% endif %}">
+            <div class="declaration-section__heading">
+                <h3>{{ phase.grouper.name }}</h3>
+            </div>
+            {% for declaration in phase.list %}
+                <article class="activity-card">
+                    <p>
+                        En la actividad <span class="activity-name">{{ declaration.activity }}</span> se utilizó
+                        <strong>{{ declaration.ai_tool_name }}</strong>
+                        ({{ declaration.type_ai_tool }}, modelo
+                        {{ declaration.ai_model_name }}{% if declaration.ai_model_version %} {{ declaration.ai_model_version }}{% endif %}).
+                        {% if declaration.input_data %}
+                            Se proporcionó {{ declaration.input_data }}.
+                        {% endif %}
+                        La verificación humana consistió en {{ declaration.human_verification }}.
+                        El nivel de apoyo de la IAG fue
+                        <strong class="support-level--{{ declaration.ai_support_level|lower }}">
+                            {{ declaration.ai_support_level }}
+                        </strong>.
+                    </p>
+                </article>
+            {% endfor %}
+        </section>
+    {% endfor %}
+
+    <div class="description_responsibility">
+        <div class="heading">
+            <h3>Responsabilidad</h3>
+        </div>
+        <aside class="responsibility-box">
+            Todas las salidas generadas por IA fueron revisadas, validadas y, cuando fue necesario,
+            modificadas por los miembros del equipo para asegurar su calidad, precisión y alineación
+            con los objetivos del proyecto. La responsabilidad del contenido final recae íntegramente
+            en el/los autor/es. Las herramientas de IA generativa no figuran como autores y no asumen
+            responsabilidad alguna por los resultados finales.
+        </aside>
+    </div>
+</article>

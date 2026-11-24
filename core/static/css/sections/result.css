@@ -2,13 +2,22 @@
     background-color: white;
     display: flex;
     flex-direction: column;
-    border: 3px solid black;
+    border: 0;
     border-radius: 16px;
-    padding: 16px;
-    width: 450px;
-    min-height: 670px;
+    padding: 0;
+    width: 100%;
+    min-height: 860px;
     box-sizing: border-box;
     align-self: flex-start;
+    gap: 10px;
+}
+
+.result-declaration .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
 }
 
 .result-declaration h3 {
@@ -18,63 +27,35 @@
 .result-area {
     background-color: var(--color-gray);
     display: flex;
-    flex-direction: column;
-    min-height: 540px;
-    gap: 10px;
     border: 2px solid lightgray;
     border-radius: 8px;
     padding: 12px;
-    min-width: 0;
-    overflow: hidden;
-}
-
-.text-area {
-    background-color: white;
-    font-size: small;
-    height: 100%;
-    border: 2px dashed var(--color-primary);
-    border-radius: 16px;
-    flex: 1;
-    min-width: 0;
-    min-height: 0;
-    overflow: auto;
-}
-
-.text-area pre {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 16px;
-    max-width: 100%;
-    white-space: pre-wrap;
-    overflow-wrap: anywhere;
-    word-break: break-word;
-    text-align: left;
-    line-height: 1.6;
 }
 
 .btns {
     display: flex;
-    justify-content: right;
-    gap: 10px;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    gap: 15px;
 }
 
-.remove-custom-activity {
-    background-color: transparent;
-    border: 1px solid #8a1c1c;
-    color: #8a1c1c;
-    flex: 0 0 auto;
-    padding: 6px;
+.btns .btn-primary {
+    width: auto;
 }
 
-.remove-custom-activity:hover {
-    background-color: #8a1c1c;
-    color: white;
-}
-
-.download-button {
-    text-decoration: none;
-}
-
-.download-button:hover {
-    background-color: black;
+.text-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: small;
+    height: 100%;
+    border: 0;
+    padding: 0;
+    border-radius: 0;
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+    overflow: auto;
 }

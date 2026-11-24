@@ -1,0 +1,120 @@
+{% load static %}
+
+<dialog id="ai-process-modal-{{ activity_form.prefix }}" class="ai-process">
+
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Proceso del uso de IAG de la Actividad:</h3>
+            {% if activity_name_field %}
+                <div class="custom-activity-name-field">
+                    {{ activity_name_field.label_tag }}
+                    {{ activity_name_field }}
+                    {{ activity_name_field.errors }}
+                </div>
+            {% else %}
+                <p>{{ activity_name }}</p>
+            {% endif %}
+        </div>
+        <div class="modal-description">
+            <p>Por favor, completa los siguientes campos para registrar el proceso de IA de la actividad.</p>
+        </div>
+        {{ activity_form.non_field_errors }}
+
+        <div class="modal-body">
+            <div class="ai-tool{% if single_ai_tool_enabled %} single-tool-hidden{% endif %}">
+                <h5>
+                    <img src="{% static 'icons/bot.svg' %}" alt="" class="icon">
+                    Herramienta de IA
+                </h5>
+
+                <div class="tool-fields">
+                    <div class="tool-main">
+                        <div class="tool-name-field">
+                            {{ activity_form.ai_tool_name.label_tag }}
+                            {{ activity_form.ai_tool_name }}
+                            {{ activity_form.ai_tool_name.errors }}
+                        </div>
+                        <div class="model-name-field">
+                            {{ activity_form.ai_model_name.label_tag }}
+                            {{ activity_form.ai_model_name }}
+                            {{ activity_form.ai_model_name.errors }}
+                        </div>
+                        <div class="model-version-field">
+                            {{ activity_form.ai_model_version.label_tag }}
+                            {{ activity_form.ai_model_version }}
+                            {{ activity_form.ai_model_version.errors }}
+                        </div>
+                    </div>
+
+                    <div class="tool-type">
+                        {{ activity_form.type_ai_tool.label_tag }}
+                        <div class="selection-fields">
+                            {% for radio in activity_form.type_ai_tool %}
+                                <label for="{{ radio.id_for_label }}">
+                                    {{ radio.tag }} {{ radio.choice_label }}
+                                </label>
+                            {% endfor %}
+                            {{ activity_form.type_ai_tool.errors }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="process">
+                <div class="process-header">
+                    <h5>
+                        <img src="{% static 'icons/workflow.svg' %}" alt="" class="icon">
+                        Proceso de IAG
+                    </h5>
+                </div>
+
+                <div class="process-content">
+                    {{ activity_form.input_data.label_tag }}
+                    {{ activity_form.input_data }}
+                    {{ activity_form.input_data.errors }}
+
+                    {{ activity_form.description_process.label_tag }}
+                    {{ activity_form.description_process }}
+                    {{ activity_form.description_process.errors }}
+
+                    <div class="human-verification">
+                        {{ activity_form.human_verification.label_tag }}
+                        <img src="{% static 'icons/shield-check.svg' %}" alt="" class="icon">
+                    </div>
+                    {{ activity_form.human_verification }}
+                    {{ activity_form.human_verification.errors }}
+                </div>
+
+                <div class="support-level">
+                    {{ activity_form.ai_support_level.label_tag }}
+                    <div class="selection-fields">
+                        {% for radio in activity_form.ai_support_level %}
+                            <label for="{{ radio.id_for_label }}">
+                                {{ radio.tag }} {{ radio.choice_label }}
+                            </label>
+                        {% endfor %}
+                        {{ activity_form.ai_support_level.errors }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button 
+                type="button" 
+                class="btn-primary"
+                data-action="save-ai-process"
+            >
+                Guardar
+            </button>
+            
+            <button 
+                type="button" 
+                class="btn-secondary" 
+                onclick="closeModal(this)"
+            >
+                Cancelar
+            </button>
+        </div>
+    </div>
+</dialog>

@@ -1,0 +1,104 @@
+{% load static %}
+
+{% for custom_phase, custom_activity_formset in phase_custom_forms %}
+{% if custom_phase.id == phase.id %}
+{{ custom_activity_formset.management_form }}
+<div
+    class="custom-activity-list"
+    data-phase-id="{{ phase.id }}"
+>
+{% for custom_form in custom_activity_formset %}
+    <details class="phase-card custom-activity-card">
+        <summary class="custom-activity-controls">
+            <span class="activity-card">
+                <input
+                    type="checkbox"
+                    name="custom_activities"
+                    id="activity_{{ phase.id }}-{{ forloop.counter0 }}"
+                    value="{{ phase.id }}-{{ forloop.counter0 }}"
+                    class="activity-checkbox"
+                    data-fields-id="custom_fields_{{ phase.id }}_{{ forloop.counter0 }}"
+                    data-activity-name=""
+                    checked
+                >
+                    <span class="custom-activity-name">
+                        {{ custom_form.activity_name.value|default:"" }}
+                    </span>
+            </span>
+        </summary>
+        <div
+            class="activity-fields"
+            id="custom_fields_{{ phase.id }}_{{ forloop.counter0 }}"
+            hidden
+        >
+            {% include "ai_process_modal.html" with activity_form=custom_form activity_name_field=custom_form.activity_name single_ai_tool_enabled=single_ai_tool_enabled %}
+        </div>
+        <table
+            class="selected-activities-table"
+            data-activity-fields-id="custom_fields_{{ phase.id }}_{{ forloop.counter0 }}"
+            hidden
+        >
+            <tbody></tbody>
+            <template class="activity-actions-template">
+                <td class="activity-actions-cell">
+                    <button type="button" class="btn-primary" data-action="edit-activity" title="Editar">
+                        <img src="{% static 'icons/square-pen.svg' %}" alt="Editar" class="icon icon-white">
+                    </button>
+                    <button type="button" class="btn-secondary" data-action="delete-activity" title="Eliminar">
+                        <img src="{% static 'icons/trash.svg' %}" alt="Eliminar" class="icon icon-white">
+                    </button>
+                </td>
+            </template>
+        </table>
+    </details>
+{% endfor %}
+</div>
+<div
+    class="custom-activity-template"
+    data-phase-id="{{ phase.id }}"
+    hidden
+>
+    <details class="phase-card custom-activity-card">
+        <summary class="custom-activity-controls">
+            <span class="activity-card">
+                <input
+                    type="checkbox"
+                    name="custom_activities"
+                    id="custom_activity_{{ phase.id }}-__prefix__"
+                    value="{{ phase.id }}-__prefix__"
+                    class="activity-checkbox"
+                    data-fields-id="custom_fields_{{ phase.id }}___prefix__"
+                    data-activity-name=""
+                    checked
+                >
+                    <span class="custom-activity-name"></span>
+            </span>
+        </summary>
+        <div
+            class="activity-fields"
+            id="custom_fields_{{ phase.id }}___prefix__"
+            hidden
+        >
+            {% include "ai_process_modal.html" with activity_form=custom_activity_formset.empty_form activity_name_field=custom_activity_formset.empty_form.activity_name single_ai_tool_enabled=single_ai_tool_enabled %}
+        </div>
+        <table
+            class="selected-activities-table"
+            data-activity-fields-id="custom_fields_{{ phase.id }}___prefix__"
+            hidden
+        >
+            <tbody></tbody>
+            <template class="activity-actions-template">
+                <td class="activity-actions-cell">
+                    <button type="button" class="btn-primary" data-action="edit-activity">
+                        <img src="{% static 'icons/square-pen.svg' %}" alt="" class="icon icon-white">
+                    </button>
+                    <button type="button" class="btn-secondary" data-action="delete-activity">
+                        <img src="{% static 'icons/trash.svg' %}" alt="" class="icon icon-white">
+                    </button>
+                </td>
+            </template>
+        </table>
+    </details>
+</div>
+{% endif %}
+{% endfor %}

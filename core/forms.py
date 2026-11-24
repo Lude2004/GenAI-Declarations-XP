@@ -8,71 +8,122 @@ AI_TOOL_CHOICES = [
 ]
 
 class ProjectForm(forms.Form):
+    required_css_class = "required"
+    label_suffix = ""
+
     project_name = forms.CharField(
         max_length=150,
-        label="Nombre del proyecto de software",
+        label="Nombre",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Ej. Sistema de gestión de inventario",
+            }
+        )
     )
+
     use_single_ai_tool = forms.BooleanField(
         required=False,
         label="Utilicé una sola herramienta de IAG para todas las actividades",
     )
+
     global_ai_tool_name = forms.CharField(
         max_length=20,
-        required=False,
-        label="Nombre de la herramienta",
+        label="Nombre",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Ej. ChatGPT",
+            }
+        )
     )
+
     global_type_ai_tool = forms.ChoiceField(
         choices=AI_TOOL_CHOICES,
-        required=False,
         widget=forms.RadioSelect,
         label="Tipo de herramienta",
     )
+
     global_ai_model_name = forms.CharField(
         max_length=20,
-        required=False,
-        label="Nombre del modelo de IA",
+        label="Modelo de IA",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Ej. GPT 6.1",
+            }
+        )
     )
+
     global_ai_model_version = forms.CharField(
         max_length=10,
-        required=False,
         label="Versión",
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Ej. Sol",
+            }
+        )
     )
 
 class ActivityDeclarationForm(forms.Form):
+    required_css_class = "required"
+    label_suffix = ""
+
     ai_tool_name = forms.CharField(
         max_length=20,
-        required=False,
         label="Nombre",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Ej. ChatGPT",
+            }
+        )
     )
 
     type_ai_tool = forms.ChoiceField(
         choices=AI_TOOL_CHOICES,
-        required=False,
         widget=forms.RadioSelect,
         label="Tipo de herramienta",
     )
 
     ai_model_name = forms.CharField(
         max_length=20,
-        required=False,
         label="Modelo de IA",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Ej. GPT 6.1",
+            }
+        )
     )
 
     ai_model_version = forms.CharField(
         max_length=10,
-        required=False,
         label="Versión",
+        required=False,
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Ej. Sol",
+            }
+        )
     )
 
     input_data = forms.CharField(
         max_length=100,
-        label="Datos de entrada compartidos",
         required=False,
+        label="Datos de entrada compartidos",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Ej. Documentación del proyecto",
+            }
+        )
     )
 
     description_process = forms.CharField(
         max_length=200,
         label="Descripción de uso",
+        widget=forms.Textarea(
+            attrs={
+                "placeholder": "Ej. Generar código de la interfaz de usuario",
+                "rows": 3,
+            }
+        )
     )
 
     ai_support_level = forms.ChoiceField(
@@ -88,11 +139,19 @@ class ActivityDeclarationForm(forms.Form):
     human_verification = forms.CharField(
         max_length=200,
         label="Proceso de validación humana",
-        required=False,
+        widget=forms.Textarea(
+            attrs={
+                "placeholder": "Ej. Revisión del código y modificaciones por parte del equipo de desarrollo",
+                "rows": 3,
+            }
+        )
     )
 
 
 class CustomActivityDeclarationForm(ActivityDeclarationForm):
+    required_css_class = "required"
+    label_suffix = ""
+
     activity_name = forms.CharField(
         max_length=200,
         label="Nombre de la actividad realizada",

@@ -1,34 +1,44 @@
 {% load static %}
 
 <section class="result-declaration">
-        <h3>
-            <img src="{% static 'icons/file-text.svg' %}" alt="" class="icon">
-            Tu declaración generada
-        </h3>
+        <div class="header">
+            <h3>
+                <img src="{% static 'icons/file-text.svg' %}" alt="" class="icon">
+                Tu declaración generada
+            </h3>
+        </div>
 
         <div class="result-area">
             <div class="btns">
                 <button 
                     type="button"
+                    class="btn-secondary"
                     id="copy-declaration"
                 >
                     Copiar
                 </button>
+
                 <a
                     href="{% url 'download_declaration_pdf' %}"
-                    class="download-button"
+                    class="btn btn-primary"
                 >
                     Descargar .pdf
                     <img src="{% static 'icons/file-down.svg' %}" alt="" class="icon icon-white">
                 </a>
             </div>
-
-            <section class="text-area" id="declaration">
-                {% if result_text %}
-                    <pre>{{ result_text }}</pre>
-                {% else %}
-                    <p>Complete el formulario para generar tu declaración.</p>
-                {% endif %}
-            </section>
         </div>
+
+        <div class="result-text">
+        <section class="text-area" id="declaration">
+            {% if result_text %}
+                {% include 'declaration_document.html' with declarations=declarations document_use_iag_enabled=True %}
+            {% endif %}
+
+            {% if not result_text and not form_errors %}
+                <p>Completa y registra al menos una actividad asistida con IAG para continuar.</p>
+            {% elif form_errors %}
+                <p class="form-error-result">La declaración no se generó porque hay datos inválidos o incompletos.</p>
+            {% endif %}
+        </section>
+    </div>
 </section>

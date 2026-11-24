@@ -1,0 +1,51 @@
+dialog {
+    border: none;
+    border-radius: 12px;
+    padding: 0;
+    max-width: 750px;
+    width: 100%;
+    margin: 0 auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.75); 
+}
+
+.confirmation-dialog {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 24px;
+}
+
+.confirmation-dialog h3 {
+    margin: 0 0 10px;
+}
+
+.confirmation-dialog p {
+    margin: 0;
+}
+
+.dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.confirmation-dialog:not([open]) {
+    display: none;
+}
+
+.confirmation-dialog[open] {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

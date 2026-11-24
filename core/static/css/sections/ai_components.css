@@ -1,0 +1,274 @@
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.modal-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    border-bottom: 2px solid var(--color-borders);
+}
+
+.modal-header h3 {
+    margin: 0;
+}
+
+.modal-header p {
+    margin: 0;
+    background-color: var(--color-gray);
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.modal-description p {
+    width: 100%;
+    margin: 0;
+    padding: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.ai-process {
+    background-color: var(--color-gray);
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    gap: 10px;
+    margin: 5px 0 5px 0;
+}
+
+.ai-process:not([open]) {
+    display: none;
+}
+
+.global-ai-tool {
+    border: 2px solid var(--color-borders);
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    gap: 10px;
+}
+
+.global-ai-tool[hidden],
+.ai-tool[hidden] {
+    display: none;
+}
+
+h5,
+.support-level-label {
+    border-bottom: 2px solid var(--color-borders);
+    padding-bottom: 10px;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.ai-tool,
+.process {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid var(--color-borders);
+    border-radius: 10px;
+    padding: 10px;
+    gap: 10px;
+    box-sizing: border-box;
+}
+
+.tool-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.tool-main {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.5fr) minmax(110px, 0.8fr);
+    gap: 10px;
+}
+
+.tool-name-field,
+.model-name-field,
+.model-version-field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+.tool-type {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.tool-type .selection-fields {
+    justify-content: space-around;
+    flex-wrap: wrap;
+    row-gap: 4px;
+}
+
+.process {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(220px, 1fr);
+    grid-template-areas:
+        "header header"
+        "content support";
+    align-items: start;
+}
+
+.process-header {
+    grid-area: header;
+}
+
+.process-header h5 {
+    margin: 5px;
+}
+
+.process-content {
+    grid-area: content;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    gap: 10px;
+}
+
+.support-level {
+    grid-area: support;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    padding: 16px;
+    gap: 10px;
+    box-sizing: border-box;
+}
+
+.support-level .selection-fields {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+@media (max-width: 768px) {
+    .tool-main {
+        grid-template-columns: 1fr;
+    }
+
+    .process {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "header"
+            "content"
+            "support";
+    }
+}
+
+h5,
+h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ai-tool h5,
+.ai-model h5,
+.process h5  {
+    margin: 0;
+}
+
+.ai-model {
+    background-color: var(--color-gray);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--color-borders);
+    border-radius: 8px;
+    padding: 12px;
+    gap: 8px;
+}
+
+.fields {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.selection-fields {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.selection-fields > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+}
+
+.selection-fields > ul {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.selection-fields label {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 10px 5px 0;
+    gap: 4px;
+    cursor: pointer;
+}
+
+.selection-fields label:hover {
+    background-color: lightblue;
+    border-radius: 8px;
+}
+
+.human-verification {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: left;
+    gap: 5px;
+}
+
+label.required::before {
+    content: none;
+}
+
+label.required::after {
+    content: " *";
+    color: red;
+}
+
+.support-level-label {
+    display: block;
+    font-weight: 800;
+}
+
+.form-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 40px;
+    max-height: 200px;
+}

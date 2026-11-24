@@ -1,0 +1,45 @@
+{% load static %}
+
+<div class="single-ai-tool" 
+    {% if not single_ai_tool_enabled %}hidden{% endif %}>
+    <div
+        class="global-ai-tool"
+        {% if not single_ai_tool_enabled %}hidden{% endif %}
+    >
+        <h5>
+            <img src="{% static 'icons/bot.svg' %}" alt="" class="icon">
+            Herramienta de IA
+        </h5>
+        <div class="tool-fields">
+            <div class="tool-main">
+                <div class="tool-name-field">
+                    {{ project_form.global_ai_tool_name.label_tag }}
+                    {{ project_form.global_ai_tool_name }}
+                    {{ project_form.global_ai_tool_name.errors }}
+                </div>
+                <div class="model-name-field">
+                    {{ project_form.global_ai_model_name.label_tag }}
+                    {{ project_form.global_ai_model_name }}
+                    {{ project_form.global_ai_model_name.errors }}
+                </div>
+                <div class="model-version-field">
+                    {{ project_form.global_ai_model_version.label_tag }}
+                    {{ project_form.global_ai_model_version }}
+                    {{ project_form.global_ai_model_version.errors }}
+                </div>
+            </div>
+
+            <div class="tool-type">
+                {{ project_form.global_type_ai_tool.label_tag }}
+                <div class="selection-fields">
+                    {% for radio in project_form.global_type_ai_tool %}
+                        <label for="{{ radio.id_for_label }}">
+                            {{ radio.tag }} {{ radio.choice_label }}
+                        </label>
+                    {% endfor %}
+                    {{ project_form.global_type_ai_tool.errors }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
